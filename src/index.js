@@ -8,8 +8,7 @@ function importFromUrl(url, options) {
     if (cache) return cache.error ? reject(cache.error) : resolve(cache.module);
 
     url = importFromUrl.modules[url] || url;
-    axios(Object.assign({ method: 'GET', url }, importFromUrl.options, options))
-      .then(function(res){
+    axios(Object.assign({ method: 'GET', url }, importFromUrl.options, options)).then(function(res){
       var string = res.data.toString();
       try {
         var _module = new module.constructor();
