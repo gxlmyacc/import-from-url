@@ -7,6 +7,7 @@ function importFromUrl(url, options) {
   return new Promise(function (resolve, reject) {
     var cache = importFromUrl.cached[url];
     if (cache) return cache.error ? reject(cache.error) : resolve(cache.module);
+    url = importFromUrl.modules[url] || url;
     axios(Object.assign({
       method: 'GET',
       url
@@ -34,6 +35,7 @@ function importFromUrl(url, options) {
   });
 }
 
+importFromUrl.modules = {};
 importFromUrl.cached = {};
 importFromUrl.options = {};
 module.exports = importFromUrl;
